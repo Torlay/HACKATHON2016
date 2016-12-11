@@ -1,0 +1,9 @@
+Chave API MAPS Rotas
+
+AIzaSyAs3myT2oGL2ImbFVgx4mR-oR5DDPBQEik
+
+
+https://maps.googleapis.com/maps/api/directions/json?origin=06541005&destination=Sao+Paulo+SP&key=AIzaSyAs3myT2oGL2ImbFVgx4mR-oR5DDPBQEik
+
+
+https://developers.google.com/maps/documentation/javascript/?hl=pt-br

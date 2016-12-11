@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-ng-app="saalc" manifest="cache.appcache">
+  <head>
+    <base href="/" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+    <div data-ng-view>
+      <!--Area onde as páginas vão ser renderizadas -->
+    </div>
+    <script src="/libs/angular.min.js"></script>
+    <script src="/libs/angular-animate.min.js"></script>
+    <script src="/libs/angular-route.min.js"></script>
+    <script src="/libs/jquery-2.2.3.min.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+
+    <script src="/app.js"></script>
+    <script src="/src/controllers/cliente.controller.js"></script>
+    <script src="/src/controllers/vistoriador.controller.js"></script>
+    <script src="/src/controllers/visita.controller.js"></script>
+    <script src="/src/controllers/avaliacao.controller.js"></script>
+    <script src="/src/constants/url.contant.js"></script>
+    <script src="/src/services/crud.service.js"></script>
+    <script src="/src/services/pagination.service.js"></script>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="form-group">
+          <label>Origem:</label>
+          <input type="text" class="form-control" id="origem" maxlength="40" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="form-group">
+          <label>Destino:</label>
+          <input type="text" class="form-control" id="destino" maxlength="40" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" onclick="initMap()">Calcular</button>
+          <button type="button" class="btn btn-primary" onclick="getLocation()">Minha Posição</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+    //google maps api
+    //feito as 4 da manhã não espere muito
+      function initMap() {
+        var chicago = document.getElementById('origem').value;
+        var indianapolis = document.getElementById('destino').value;
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: chicago,
+          scrollwheel: false,
+          zoom: 7
+        });
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({
+          map: map
+        });
+
+        // Set destination, origin and travel mode.
+        var request = {
+          destination: indianapolis,
+          origin: chicago,
+          travelMode: 'DRIVING'
+        };
+
+        // Pass the directions request to the directions service.
+        var directionsService = new google.maps.DirectionsService();
+        directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+            // Display the route on the map.
+            directionsDisplay.setDirections(response);
+          }
+        });
+      }
+
+      var x = document.getElementById("demo");
+      function getLocation() {
+          if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(showPosition);
+          } else {
+              x.innerHTML = "Geolocation is not supported by this browser.";
+          }
+      }
+      function showPosition(position) {
+          document.getElementById('origem').value = position.coords.latitude +", "+ position.coords.longitude;
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAs3myT2oGL2ImbFVgx4mR-oR5DDPBQEik&callback=initMap" async defer></script>
+
+  </body>
+</html>

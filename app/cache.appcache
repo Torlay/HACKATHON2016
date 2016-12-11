@@ -1,0 +1,11 @@
+CACHE MANIFEST
+/libs/angular.min.js
+/libs/angular-animate.min.js
+/libs/angular-route.min.js
+/libs/bootstrap.min.js
+/libs/jquery-2.2.3.min.js
+/css/bootstrap.min.css
+/css/style.css
+
+NETWORK:
+*

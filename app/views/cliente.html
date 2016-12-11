@@ -1,0 +1,129 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/cliente">Cliente</a></li>
+        <li><a href="/vistoriador">Vistoriadores</a></li>
+        <li><a href="/">Visitas</a></li>
+        <li><a href="/avaliacao">Avaliações</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<section class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div>
+        <div class="row">
+            <div class="alinhar-direita">
+                <button type="button" class="btn btn-default btn-ajuste btn-novo" data-ng-click="Cliente.novo()" data-toggle="modal" data-target="#modalCliente"><span class="glyphicon glyphicon-plus"></span></button>
+            <button type="button" class="btn btn-default btn-ajuste btn-novo" data-ng-click="Cliente.listRecords()"><span class="glyphicon glyphicon-refresh"></span></button>
+            </div>
+        </div>
+        <table class="table table-hover">
+          <tbody>
+            <tr data-ng-repeat="cliente in Cliente.list | limitTo:15:Cliente.init" data-ng-click="Cliente.editar(cliente)" data-toggle="modal" data-target="#modalCliente">
+              <td>
+                <div class="row">
+                  <div class="col-md-6 col-sm-6">
+                    <strong>Cliente:</strong> {{ cliente.nome }}
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <ul class="pager">
+      <li><a href="#" data-ng-click="Cliente.prevList()">Anterior</a></li>
+      <li><a href="#" data-ng-click="Cliente.nextList()">Proxima</a></li>
+    </ul>
+  </nav>
+</section>
+<section>
+  <div class="modal fade" id="modalCliente" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Cadastro de clientes</h4>
+        </div>
+        <div class="modal-body">
+          <form class='form-horizontal' name="formCliente">
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="form-group">
+                  <label>Nome:</label>
+                  <input type="text" class="form-control" data-ng-model="Cliente.form.nome" maxlength="40" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="form-group">
+                  <label>CEP:</label>
+                  <input type="text" class="form-control" data-ng-model="Cliente.form.cep" maxlength="15" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1">
+                <div class="form-group">
+                  <label>Estado:</label>
+                  <select class="form-control" data-ng-model="Cliente.form.estado" required>
+                    <option value="">Selecione</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espirito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn btn-primary" data-ng-click="Cliente.create()">Salvar Registro</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
